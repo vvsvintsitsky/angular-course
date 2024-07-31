@@ -7,8 +7,12 @@ import { NgFor } from '@angular/common';
   standalone: true,
   imports: [NgFor],
   templateUrl: './breadcrumbs.component.html',
-  styleUrl: './breadcrumbs.component.css'
+  styleUrl: './breadcrumbs.component.css',
 })
 export class BreadcrumbsComponent {
-  @Input({ required: true }) breadcrumbs!: Breadcrumb[]
+  @Input({ required: true }) breadcrumbs!: Breadcrumb[];
+
+  trackByItems(_: number, item: Breadcrumb) {
+    return item.label;
+  }
 }

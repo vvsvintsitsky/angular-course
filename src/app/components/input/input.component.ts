@@ -1,22 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
 })
 export class InputComponent {
   @Input() placeholder = '';
 
-  @Input() defaultValue = '';
+  @Input({ required: true }) formControlName!: string;
 
   @Input() required = false;
-
-  @Output() changeEvent = new EventEmitter<Event>();
-
-  handleChange(event: Event) {
-    this.changeEvent.emit(event);
-  }
 }

@@ -4,18 +4,18 @@
     <app-logo logo></app-logo>
 </app-header>
 <app-breadcrumbs [breadcrumbs]="breadcrumbs" class="content-padding"></app-breadcrumbs>
-<div class="search content-padding">
-    <app-input></app-input>
-    <app-button styleType="secondary" (clickEvent)="searchCourses()">
+<form class="search content-padding" [formGroup]="searchForm" (ngSubmit)="searchCourses()">
+    <app-input formControlName="predicate"></app-input>
+    <app-button styleType="secondary">
         <span label>Search</span>
     </app-button>
-</div>
+</form>
 <div class="actions content-padding">
     <app-button (clickEvent)="addCourse()"><span label>Add Course</span></app-button>
 </div>
 <div class="content content-padding">
     <ul class="courses-list">
-        <li *ngFor="let item of courses" class="course-item">
+        <li *ngFor="let item of courses; trackBy: trackByCourse" class="course-item">
             <app-course-card
                 [course]="item"
                 (editEvent)="editCourse(item)"

@@ -12,6 +12,7 @@ import { CourseCardComponent } from '../../components/course-card/course-card.co
 import { Course } from '../../../schema';
 import { InputComponent } from '../../components/input/input.component';
 import { ButtonComponent } from '../../components/button/button.component';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-courses-page',
@@ -28,15 +29,19 @@ import { ButtonComponent } from '../../components/button/button.component';
     NgFor,
     InputComponent,
     ButtonComponent,
+    ReactiveFormsModule,
   ],
   standalone: true,
 })
 export class CoursesPageComponent {
   user = MOCK_USER;
   @Input() courses = MOCK_COURSES;
+
   breadcrumbs: Breadcrumb[] = [{ label: 'Courses' }];
 
-  @Input() predicate = '';
+  searchForm = new FormGroup({
+    predicate: new FormControl(''),
+  });
 
   editCourse(course: Course) {
     console.log(`edit ${course.id}`);
@@ -47,12 +52,18 @@ export class CoursesPageComponent {
   }
 
   searchCourses() {
+    const predicate = this.searchForm.value.predicate || '';
+
     this.courses = MOCK_COURSES.filter(({ title }) =>
-      title.includes(this.predicate)
+      title.includes(predicate)
     );
   }
 
   addCourse() {
     console.log('add course');
+  }
+
+  trackByCourse(_: number, item: Course) {
+    return item.id;
   }
 }

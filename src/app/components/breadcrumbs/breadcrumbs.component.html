@@ -1,1 +1,1 @@
-<ul class="root"><li *ngFor="let item of breadcrumbs">{{ item.label }}</li></ul>
+<ul class="root"><li *ngFor="let item of breadcrumbs; trackBy: trackByItems">{{ item.label }}</li></ul>
