@@ -1,0 +1,4 @@
+<div>
+    <div><button (click)="toggle()"><ng-content select="[title]"></ng-content></button></div>
+    <div *ngIf="isExpanded"><ng-content select="[content]"></ng-content></div>
+</div>

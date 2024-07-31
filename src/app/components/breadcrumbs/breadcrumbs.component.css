@@ -1,0 +1,15 @@
+:host {
+    padding: 20px;
+    background-color: white;
+    color: black;
+    display: flex;
+}
+
+.root {
+    display: flex;
+    gap: 20px;
+}
+
+.root li {
+    list-style: none;
+}

@@ -1,0 +1,14 @@
+.primary {
+    background-color: var(--bright-blue);
+    color: white;
+}
+
+.secondary {
+    background-color: var(--hot-red);
+    color: white;
+}
+
+.text {
+    color: var(--link);
+    text-decoration: underline;
+}

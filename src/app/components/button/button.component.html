@@ -1,0 +1,9 @@
+<button
+    [ngClass]="{
+        primary: !styleType || styleType === 'primary',
+        secondary: styleType === 'secondary',
+        text: styleType === 'text',
+    }"
+>
+    <ng-content select="[label]"></ng-content>
+</button>

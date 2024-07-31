@@ -1,0 +1,16 @@
+<div class="root">
+    <div class="header">
+        <h2>{{ course.title }}</h2>
+        <div class="details">
+            <div>{{ formattedDuration() }}</div>
+            <div>{{ formattedDate() }}</div>
+        </div>
+    </div>
+    <div class="content">
+        <div>{{ course.description }}</div>
+        <div class="controls">
+            <app-button (clickEvent)="handleEdit()"><span label>Edit</span></app-button>
+            <app-button (clickEvent)="handleDelete()"><span label>Delete</span></app-button>
+        </div>
+    </div>
+</div>

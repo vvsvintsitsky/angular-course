@@ -1,0 +1,32 @@
+.root {
+    padding: 20px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.details {
+    display: flex;
+    gap: 15px;
+    color: grey;
+}
+
+.content {
+    display: flex;
+    gap: 30px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+}

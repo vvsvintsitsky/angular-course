@@ -1,1 +1,6 @@
-<p>header works!</p>
+    <ng-content select="[logo]"></ng-content>
+    
+    <div *ngIf="!!user" class="content">
+        <app-user-chip [user]="user"></app-user-chip>
+        <app-button><span label>Log out</span></app-button>
+    </div>
