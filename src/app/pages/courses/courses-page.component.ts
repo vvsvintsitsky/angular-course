@@ -14,6 +14,7 @@ import { InputComponent } from '../../components/input/input.component';
 import { ButtonComponent } from '../../components/button/button.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IfUsefulDirective } from '../../directives/if-useful.directive';
+import { WithShadowDirective } from '../../directives/with-shadow.directive';
 
 @Component({
   selector: 'app-courses-page',
@@ -32,6 +33,7 @@ import { IfUsefulDirective } from '../../directives/if-useful.directive';
     ButtonComponent,
     ReactiveFormsModule,
     IfUsefulDirective,
+    WithShadowDirective,
   ],
   standalone: true,
 })
