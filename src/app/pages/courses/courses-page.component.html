@@ -15,7 +15,7 @@
 </div>
 <div class="content content-padding">
     <ul class="courses-list">
-        <li *ngFor="let item of courses; trackBy: trackByCourse" class="course-item" appWithShadow>
+        <li *ngFor="let item of courses; trackBy: trackByCourse" class="course-item" [appWithShadow]="'red'">
                 <app-course-card
                     *appIfUseful="item.id < 3"
                     [course]="item"

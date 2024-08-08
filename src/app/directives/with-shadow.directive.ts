@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
   selector: '[appWithShadow]',
@@ -7,12 +7,14 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 export class WithShadowDirective {
   constructor(private elementRef: ElementRef) {}
 
+  @Input() appWithShadow = '';
+
   @HostListener('mouseenter')
   onMouseEnter() {
     const style = this.elementRef.nativeElement.style;
     style.zIndex = 1;
     style.position = 'relative';
-    style.boxShadow = '10px 10px 10px 10px';
+    style.boxShadow = `10px 10px 10px 10px ${this.appWithShadow}`;
   }
 
   @HostListener('mouseleave')
