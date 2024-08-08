@@ -16,11 +16,13 @@
 <div class="content content-padding">
     <ul class="courses-list">
         <li *ngFor="let item of courses; trackBy: trackByCourse" class="course-item">
-            <app-course-card
-                [course]="item"
-                (editEvent)="editCourse(item)"
-                (deleteEvent)="deleteCourse(item)">
-            </app-course-card>
+            <div *appIfUseful="item.id < 2">
+                <app-course-card
+                    [course]="item"
+                    (editEvent)="editCourse(item)"
+                    (deleteEvent)="deleteCourse(item)">
+                </app-course-card>
+            </div>
         </li>
     </ul>
 </div>

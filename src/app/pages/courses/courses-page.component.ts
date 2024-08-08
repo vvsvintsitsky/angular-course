@@ -13,6 +13,7 @@ import { Course } from '../../../schema';
 import { InputComponent } from '../../components/input/input.component';
 import { ButtonComponent } from '../../components/button/button.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { IfUsefulDirective } from '../../directives/if-useful.directive';
 
 @Component({
   selector: 'app-courses-page',
@@ -30,6 +31,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
     InputComponent,
     ButtonComponent,
     ReactiveFormsModule,
+    IfUsefulDirective,
   ],
   standalone: true,
 })
