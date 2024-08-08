@@ -1,1 +1,1 @@
-<input type="text" [placeholder]="placeholder" [formControlName]="formControlName" />
+<input type="text" [placeholder]="placeholder" [disabled]="isDisabled" (blur)="handleBlur()" [(ngModel)]="value" />
