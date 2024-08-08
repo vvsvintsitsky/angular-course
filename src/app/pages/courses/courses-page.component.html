@@ -14,9 +14,9 @@
     <app-button (clickEvent)="addCourse()"><span label>Add Course</span></app-button>
 </div>
 <div class="content content-padding">
-    <div *ngIf="!!courses[0]">First course: {{ courses[0] | courseLabel:'_!_' }}</div>
     <ul class="courses-list">
-        <li *ngFor="let item of courses; trackBy: trackByCourse" class="course-item" [appWithShadow]="'red'">
+        <li *ngFor="let item of (courses | async); trackBy: trackByCourse" class="course-item" [appWithShadow]="'red'">
+                <div>First course: {{ item | courseLabel:'_!_' }}</div>
                 <app-course-card
                     *appIfUseful="item.id < 3"
                     [course]="item"

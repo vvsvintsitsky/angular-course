@@ -1,11 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { LogoComponent } from '../../components/logo/logo.component';
 import { DetailsComponent } from '../../components/details/details.component';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { MOCK_USER } from '../../../mocks/user';
-import { MOCK_COURSES } from '../../../mocks/courses';
 import { BreadcrumbsComponent } from '../../components/breadcrumbs/breadcrumbs.component';
 import { Breadcrumb } from '../../components/breadcrumbs/types';
 import { CourseCardComponent } from '../../components/course-card/course-card.component';
@@ -16,6 +15,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IfUsefulDirective } from '../../directives/if-useful.directive';
 import { WithShadowDirective } from '../../directives/with-shadow.directive';
 import { CourceLabelPipe } from '../../pipes/course-label.pipe';
+import { CoursesService } from '../../services/courses.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-courses-page',
@@ -37,12 +38,24 @@ import { CourceLabelPipe } from '../../pipes/course-label.pipe';
     WithShadowDirective,
     CourceLabelPipe,
     NgIf,
+    AsyncPipe,
   ],
   standalone: true,
 })
-export class CoursesPageComponent {
+export class CoursesPageComponent implements OnInit {
+  private courses$!: Observable<Course[]>;
+
+  get courses() {
+    return this.courses$;
+  }
+
+  constructor(private coursesService: CoursesService) {}
+
+  ngOnInit(): void {
+    this.searchCourses();
+  }
+
   user = MOCK_USER;
-  @Input() courses = MOCK_COURSES;
 
   breadcrumbs: Breadcrumb[] = [{ label: 'Courses' }];
 
@@ -55,15 +68,15 @@ export class CoursesPageComponent {
   }
 
   deleteCourse(course: Course) {
-    console.log(`delete ${course.id}`);
+    this.coursesService.deleteCourse(course.id).subscribe(() => {
+      this.searchCourses();
+    });
   }
 
   searchCourses() {
     const predicate = this.searchForm.value.predicate || '';
 
-    this.courses = MOCK_COURSES.filter(({ title }) =>
-      title.includes(predicate)
-    );
+    this.courses$ = this.coursesService.getAll({ title: predicate });
   }
 
   addCourse() {
