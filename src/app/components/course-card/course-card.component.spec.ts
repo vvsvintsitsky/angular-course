@@ -8,12 +8,18 @@ describe('CourseCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CourseCardComponent]
-    })
-    .compileComponents();
+      imports: [CourseCardComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CourseCardComponent);
     component = fixture.componentInstance;
+    component.course = {
+      creationDate: new Date().toISOString(),
+      description: 'desc',
+      durationMintues: 10,
+      id: 1,
+      title: 'title',
+    };
     fixture.detectChanges();
   });
 

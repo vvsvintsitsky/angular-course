@@ -8,21 +8,29 @@ describe('CoursesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CoursesPageComponent]
-    })
-    .compileComponents();
+      imports: [CoursesPageComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CoursesPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should have configured title', () => {
-    const testTitle = 'testTitle'
-    component.title = testTitle
+  it('should perform search', async () => {
+    fixture.detectChanges();
 
-    fixture.detectChanges()
+    const spyFunc = spyOn(component, 'searchCourses');
 
-    expect(fixture.nativeElement.querySelector('span').innerText).toEqual(testTitle);
+    const inputElement = fixture.nativeElement.querySelector('input');
+    const testValue = 'sometestvalue';
+    inputElement.value = testValue;
+    inputElement.dispatchEvent(new Event('input'));
+
+    const formElement = fixture.nativeElement.querySelector('form');
+    formElement.dispatchEvent(new Event('submit'));
+
+    await fixture.whenStable();
+
+    expect(spyFunc).toHaveBeenCalled();
   });
 });

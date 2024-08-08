@@ -8,12 +8,12 @@ describe('UserChipComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserChipComponent]
-    })
-    .compileComponents();
+      imports: [UserChipComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UserChipComponent);
     component = fixture.componentInstance;
+    component.user = { firstName: 'asd', lastName: 'last', id: 1 };
     fixture.detectChanges();
   });
 
