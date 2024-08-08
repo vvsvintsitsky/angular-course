@@ -3,7 +3,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { LogoComponent } from '../../components/logo/logo.component';
 import { DetailsComponent } from '../../components/details/details.component';
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { MOCK_USER } from '../../../mocks/user';
 import { MOCK_COURSES } from '../../../mocks/courses';
 import { BreadcrumbsComponent } from '../../components/breadcrumbs/breadcrumbs.component';
@@ -15,6 +15,7 @@ import { ButtonComponent } from '../../components/button/button.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IfUsefulDirective } from '../../directives/if-useful.directive';
 import { WithShadowDirective } from '../../directives/with-shadow.directive';
+import { CourceLabelPipe } from '../../pipes/course-label.pipe';
 
 @Component({
   selector: 'app-courses-page',
@@ -34,6 +35,8 @@ import { WithShadowDirective } from '../../directives/with-shadow.directive';
     ReactiveFormsModule,
     IfUsefulDirective,
     WithShadowDirective,
+    CourceLabelPipe,
+    NgIf,
   ],
   standalone: true,
 })
