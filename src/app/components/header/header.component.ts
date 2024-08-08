@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../../../schema';
 import { NgClass, NgIf } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
@@ -9,7 +9,8 @@ import { UserChipComponent } from '../user-chip/user-chip.component';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   standalone: true,
-  imports: [NgClass, ButtonComponent, UserChipComponent, NgIf]
+  imports: [NgClass, ButtonComponent, UserChipComponent, NgIf],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   @Input() user?: User

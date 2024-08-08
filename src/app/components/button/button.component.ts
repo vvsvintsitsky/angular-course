@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostListener,
@@ -14,6 +15,7 @@ import { NgClass } from '@angular/common';
   imports: [NgClass],
   templateUrl: './button.component.html',
   styleUrl: './button.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
   @Output() clickEvent = new EventEmitter<Event>();

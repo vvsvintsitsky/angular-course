@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { User } from '../../../schema';
 
 @Component({
@@ -6,8 +6,9 @@ import { User } from '../../../schema';
   standalone: true,
   imports: [],
   templateUrl: './user-chip.component.html',
-  styleUrl: './user-chip.component.css'
+  styleUrl: './user-chip.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserChipComponent {
-  @Input({ required: true }) user!: User
+  @Input({ required: true }) user!: User;
 }

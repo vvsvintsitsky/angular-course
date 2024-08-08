@@ -1,6 +1,7 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   booleanAttribute,
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   EventEmitter,
@@ -16,6 +17,7 @@ import {
   imports: [NgIf, NgTemplateOutlet],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailsComponent {
   @Input({ transform: booleanAttribute }) isExpanded = false;

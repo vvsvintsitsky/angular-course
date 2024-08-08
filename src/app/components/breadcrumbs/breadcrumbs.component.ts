@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Breadcrumb } from './types';
 import { NgFor } from '@angular/common';
 
@@ -8,6 +8,7 @@ import { NgFor } from '@angular/common';
   imports: [NgFor],
   templateUrl: './breadcrumbs.component.html',
   styleUrl: './breadcrumbs.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsComponent {
   @Input({ required: true }) breadcrumbs!: Breadcrumb[];

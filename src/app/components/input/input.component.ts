@@ -1,4 +1,10 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  forwardRef,
+  Input,
+} from '@angular/core';
 import {
   ControlValueAccessor,
   FormsModule,
@@ -19,8 +25,11 @@ import {
   ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent implements ControlValueAccessor {
+  constructor(private changeDetectionRef: ChangeDetectorRef) {}
+
   @Input() placeholder = '';
 
   @Input() required = false;
@@ -34,8 +43,10 @@ export class InputComponent implements ControlValueAccessor {
   set value(_value: string) {
     this._value = _value;
     this.onChange(_value);
+    this.changeDetectionRef.detectChanges();
   }
 
+  @Input()
   isDisabled = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
@@ -58,5 +69,6 @@ export class InputComponent implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
+    this.changeDetectionRef.detectChanges();
   }
 }

@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { Course } from '../../../schema';
 
@@ -8,6 +14,7 @@ import { Course } from '../../../schema';
   imports: [ButtonComponent],
   templateUrl: './course-card.component.html',
   styleUrl: './course-card.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseCardComponent {
   @Input({ required: true }) course!: Course;
@@ -16,11 +23,11 @@ export class CourseCardComponent {
   @Output() deleteEvent = new EventEmitter();
 
   handleEdit() {
-    this.editEvent.emit()
+    this.editEvent.emit();
   }
 
   handleDelete() {
-    this.deleteEvent.emit()
+    this.deleteEvent.emit();
   }
 
   formattedDuration() {
