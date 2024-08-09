@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { Course } from '../../schema';
 import { MOCK_COURSES } from '../../mocks/courses';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoursesService {
+  constructor(private httpClient: HttpClient) {}
+
   private courses = MOCK_COURSES;
 
   public getAll({ title = '' }: Partial<{ title: string }> = {}): Observable<
@@ -46,13 +54,32 @@ export class CoursesService {
     return of(this.courses.find((course) => course.id === id) ?? null);
   }
 
-  public deleteCourse(id: Course['id']): Observable<boolean> {
+  public deleteCourse(id: Course['id']) {
     if (Date.now() % 2) {
-      return throwError(() => 'Something went wrong');
+      this.courses = this.courses.filter((course) => course.id !== id);
+      return of('OK');
     }
 
-    this.courses = this.courses.filter((course) => course.id !== id);
+    return this.httpClient
+      .delete<string>('/api/courses', {
+        body: { id },
+        headers: new HttpHeaders({ 'Custom-Header-Xxx': 'Zzz' }),
+        params: new HttpParams().append('param1', 'value'),
+      })
+      .pipe(
+        catchError((error) => {
+          if (error instanceof HttpErrorResponse) {
+            return throwError(
+              () => `status: ${error.status}; message: ${error.message}`
+            );
+          }
 
-    return of(true);
+          if (typeof error === 'string') {
+            throwError(() => error);
+          }
+
+          return throwError(() => 'Unknown error');
+        })
+      );
   }
 }
