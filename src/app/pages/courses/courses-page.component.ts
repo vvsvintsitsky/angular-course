@@ -17,6 +17,7 @@ import { WithShadowDirective } from '../../directives/with-shadow.directive';
 import { CourceLabelPipe } from '../../pipes/course-label.pipe';
 import { CoursesService } from '../../services/courses.service';
 import { Observable } from 'rxjs';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-courses-page',
@@ -39,6 +40,8 @@ import { Observable } from 'rxjs';
     CourceLabelPipe,
     NgIf,
     AsyncPipe,
+    RouterModule,
+    RouterLink,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,

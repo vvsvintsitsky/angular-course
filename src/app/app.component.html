@@ -173,10 +173,21 @@
     }
   }
 </style>
-
+<nav>
+  <ul>
+    <li>
+      <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
+    </li>
+    <li>
+      <a routerLink="/secondary/1" routerLinkActive="active" ariaCurrentWhenActive="page">Secondary</a>
+    </li>
+    <li>
+      <a routerLink="/heavy-weight" routerLinkActive="active" ariaCurrentWhenActive="page">Heavy Page</a>
+    </li>
+  </ul>
+</nav>
 <main class="main">
   <div class="content">
-    <app-courses-page></app-courses-page>
   </div>
 </main>
 
