@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { Course } from '../../schema';
 import { MOCK_COURSES } from '../../mocks/courses';
 
@@ -46,7 +46,11 @@ export class CoursesService {
     return of(this.courses.find((course) => course.id === id) ?? null);
   }
 
-  public deleteCourse(id: Course['id']): Observable<unknown> {
+  public deleteCourse(id: Course['id']): Observable<boolean> {
+    if (Date.now() % 2) {
+      return throwError(() => 'Something went wrong');
+    }
+
     this.courses = this.courses.filter((course) => course.id !== id);
 
     return of(true);

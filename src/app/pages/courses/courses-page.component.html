@@ -14,6 +14,7 @@
     <app-button (clickEvent)="addCourse()"><span label>Add Course</span></app-button>
 </div>
 <div class="content content-padding">
+    <div *ngIf="error$ | async as errorText" style="color: red; font-weight: 700;">{{ errorText }}</div>
     <ul class="courses-list">
         <li *ngFor="let item of (courses | async); trackBy: trackByCourse" class="course-item" [appWithShadow]="'red'">
                 <div>First course: {{ item | courseLabel:'_!_' }}</div>

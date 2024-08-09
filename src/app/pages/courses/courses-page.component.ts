@@ -16,7 +16,7 @@ import { IfUsefulDirective } from '../../directives/if-useful.directive';
 import { WithShadowDirective } from '../../directives/with-shadow.directive';
 import { CourceLabelPipe } from '../../pipes/course-label.pipe';
 import { CoursesService } from '../../services/courses.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
@@ -49,6 +49,8 @@ import { RouterLink, RouterModule } from '@angular/router';
 export class CoursesPageComponent implements OnInit {
   private courses$!: Observable<Course[]>;
 
+  protected error$ = new BehaviorSubject<string | null>(null);
+
   get courses() {
     return this.courses$;
   }
@@ -72,9 +74,22 @@ export class CoursesPageComponent implements OnInit {
   }
 
   deleteCourse(course: Course) {
-    this.coursesService.deleteCourse(course.id).subscribe(() => {
-      this.searchCourses();
-    });
+    this.coursesService
+      .deleteCourse(course.id)
+      .pipe(
+        catchError((error) => {
+          this.error$.next(error);
+          return throwError(() => error);
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.searchCourses();
+        },
+        error: (error) => {
+          console.log('delete error: ' + error);
+        },
+      });
   }
 
   searchCourses() {
